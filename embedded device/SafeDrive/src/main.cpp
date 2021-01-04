@@ -1,9 +1,18 @@
-#include <Arduino.h>
+#include<main.h>
+
+
+
+
+void printToLCD(String str1,String str2);
+
 
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(9600);
+  lcd.init();
+  lcd.backlight();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+
 }
+
