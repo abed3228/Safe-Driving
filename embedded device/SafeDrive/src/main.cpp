@@ -5,8 +5,6 @@
 
 void printToLCD(String str1);
 void printToLCD(String str1,String str2);
-void printToLCD(String str1,String str2,String str3);
-void printToLCD(String str1,String str2,String str3,String str4);
 
 void printTitle();
 void printAlcoholLevel(int value);
