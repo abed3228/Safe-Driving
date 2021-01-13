@@ -5,12 +5,13 @@
 #include <SPI.h>
 #include <Wire.h>
 
+//LCD
 LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2); // Change to (0x27,20,4) for 20x4 LCD.
-
-
 //MQ3 GAS SENSOR
 int analogPin = 0; 
 int val = 0; 
+//GPS
+
 
 
 void printToLCD(String str1){
