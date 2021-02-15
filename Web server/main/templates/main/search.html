@@ -1,0 +1,115 @@
+<title>WateringSystem-ToDo</title>
+{% extends "main/home.html" %}
+
+{% block mainblock %}
+<head>
+    <style>
+    body {
+    font-family: Arial;
+    }
+
+    * {
+    box-sizing: border-box;
+    }
+
+    form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    }
+
+    form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    }
+
+    form.example button:hover {
+    background: #0b7dda;
+    }
+
+    form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+    }
+    </style>
+</head>
+<body>
+    <form method="GET" class="example" style="margin:auto;max-width:300px">
+    	{% csrf_token %}
+        <input type="text" id="query" name="query" placeholder="Search.."/>
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+    {% if error %}
+        <div class="alert alert-danger" role="alert" style="margin:auto;max-width:300px">
+            {{ error }}
+        </div>
+    {% endif %}
+    {% if success %}
+        <div class="alert alert-success" role="alert" style="margin:auto;max-width:300px">
+            {{ success }}
+        </div>
+    {% endif %}
+    {% if form %}
+        <form action="{% url 'addcar' %}" method="POST">
+                {% csrf_token %}
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="car_number">Car Number</label>
+                            <input type="text" name="car_number" class="form-control" id="car_number" value="{{ car_number }}" disabled >
+                        </div>
+                        <div class="form-group">
+                            <label for="car_manufacturer">Car Manufacturer</label>
+                            <input type="text" name="car_manufacturer" class="form-control" id="car_manufacturer" value="{{ car_manufacturer }}" disabled >
+                        </div>
+                        <div class="form-group">
+                            <label for="car_model">Car Model</label>
+                            <input type="text" name="car_model" class="form-control" id="car_model" value="{{ car_model }}" disabled >
+                        </div>
+                        <div class="form-group">
+                            <label for="car_finishing">Car Finishing</label>
+                            <input type="text" name="car_finishing" class="form-control" id="car_finishing" value="{{ car_finishing }}" disabled >
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="car_color">Car Color</label>
+                            <input type="text" name="car_color" class="form-control" id="car_color" value="{{ car_color }}" disabled >
+                        </div>
+                        <div class="form-group">
+                            <label for="car_fuel_type">Car Fuel Type</label>
+                            <input type="text" name="car_fuel_type" class="form-control" id="car_fuel_type" value="{{ car_fuel_type }}" disabled >
+                        </div>
+                        <div class="form-group">
+                            <label for="car_test">Car Test</label>
+                            <input type="text" name="car_test" class="form-control" id="car_test" value="{{ car_test }}" disabled >
+                        </div>
+                    </div>                   
+                </div>
+                 <div class="row justify-content-center mt-5">
+                    <div class="form-group">
+                        <label for="customer_id">Customer ID</label>
+                        <option type="text" name="customer_id" class="form-control" id="customer_id" >
+                    </div>
+                    <select name="customer_id" class="form-control" id="customer_id">
+                        
+                    </select>
+                </div>
+                <div class="row justify-content-center mt-5">
+				    <input type="submit" value="Add car" class="btn btn-secondary">
+                </div>
+            </form>
+    {% endif %}
+</body>
+{% endblock %}

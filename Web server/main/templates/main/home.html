@@ -1,0 +1,206 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	{% block title_page %}
+
+	{% endblock title_page %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		#footer-fix {
+				border: 1px solid white;
+				background-color: white;
+				padding-top: 100px;
+				padding-right: 100%;
+			}
+	</style>
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/fontawesome-5.0.8/css/fontawesome-all.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+
+</head>
+<body class="animsition">
+	
+	<!-- Header -->
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'about' %}">About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'contact' %}">Contact</a>
+				</li>
+				{% if user.is_authenticated %}
+					<li class="nav-item">
+						<a class="nav-link disabled" href="#"> Hi! {{user}}</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" onclick="$('#signOutBtn').click()" class="nav-link" style="margin-right: 45px;">Logout</a>
+						<form style='display: none;' method="POST" action="{% url 'logoutuser' %}" >
+							{% csrf_token %}
+							<button id="signOutBtn" type="submit">Logout</button>
+						</form>
+                	</li>
+				{% endif %}
+
+				</ul>
+				<div class="right-topbar p-l-18">
+					<a href="#">
+						<span class="fab fa-facebook-f "></span>
+					</a>
+
+					<a href="#">
+						<span class="fab fa-youtube"></span>
+					</a>
+
+					<a href="#" class="left-topbar-item"></a>
+				</div>
+			</div>
+		</nav>
+			<!--  -->
+		
+		<div class="d-flex flex-column ">
+			<div class="p-2 d-flex justify-content-center">
+				<a href="/"><img src="{%static 'images/logo.png' %} " alt="LOGO"></a>
+			</div>
+			{% if user.is_authenticated %}
+				<div class="p-2">
+					<nav class="menu-desktop d-flex justify-content-center">
+						<ul class="main-menu">
+						
+							<li class="main-menu-active">
+								<a href="/">Home</a>
+							</li>
+							<li class="mega-menu-item dropdown">
+								<a data-toggle="dropdown">Car</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="{% url 'search' %}">Add Car</a>
+									<a class="dropdown-item" href="#">Edit Car</a>
+								</div>					
+							</li>
+
+							<li class="mega-menu-item dropdown">
+								<a data-toggle="dropdown">Customer</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="#">Add Customer</a>
+									<a class="dropdown-item" href="#">Edit Customer</a>
+								</div>
+							</li>
+
+							<li class="mega-menu-item">
+								<a href="#">Profile</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			{% else %}
+				<div class="row justify-content-center mt-5">
+					<div class="col-md-5">
+						{% if error %}
+							<div class="alert alert-danger" role="alert">
+								{{ error }}
+							</div>
+						{% endif %}
+						<form method="POST" action="{% url 'home' %}">
+							{% csrf_token %}
+							<div class="form-group">
+								<label for="username">Username</label>
+								<input type="text" name="username" class="form-control" id="username">
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input type="password" name="password" class="form-control" id="password">
+							</div>
+							<button type="submit" class="btn btn-primary">Login</button>
+						</form>
+						
+					</div>
+				</div>
+			{% endif %}
+		</div>
+		
+	</header>
+
+
+	
+
+		
+	<div class="container col-11" >
+    	{% block mainblock %}
+		{% endblock mainblock%}
+	</div>
+	<div id="footer-fix" class="container col-11" >
+	</div>
+
+	<!-- Footer -->
+	<footer>
+		<div class="bg11 fixed-bottom" >
+			<div class="container size-h-4 flex-c-c p-tb-15">
+				<span class="f1-s-1 cl0 txt-center">
+					Copyright © 2021 
+
+					<a href="#" class="f1-s-1 cl10 hov-link1">
+						Copyright &copy;<script>document.write(new Date().getFullYear());
+						</script> All rights reserved | Development by <a href="https://alnkib.com" target="_blank">Alnkib Abed</a>
+				</span>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<span class="fas fa-angle-up"></span>
+		</span>
+	</div>
+
+	<!-- Modal Video 01-->
+	<div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document" data-dismiss="modal">
+			<div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
+
+			<div class="wrap-video-mo-01">
+				<div class="video-mo-01">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!--===============================================================================================-->	
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
