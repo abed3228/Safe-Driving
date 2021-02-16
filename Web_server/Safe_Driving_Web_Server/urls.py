@@ -32,7 +32,6 @@ urlpatterns = [
     path('logout/',views.logoutuser,name="logoutuser"),
     #car
     path('search/',views.search,name="search"),
-    path('addcar/',views.addcar,name="addcar"),
 
 
     

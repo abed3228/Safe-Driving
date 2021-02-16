@@ -55,7 +55,9 @@ class Car(models.Model):
     car_color =  models.CharField(max_length=30, blank=True)
     car_fuel_type =  models.CharField(max_length=30, blank=True)
     car_test =  models.CharField(max_length=30, blank=True)
-
+    car_owner =  models.CharField(max_length=30, blank=True)
+    car_type =  models.CharField(max_length=30, blank=True)
+    car_year =  models.CharField(max_length=4, blank=True)
     def __str__(self):
             return self.car_number
 

@@ -120,3 +120,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#MEDIA_URL="/media"
+
+#STATICFILES_DIRS = ["/home/x9r71vnvvb94/webServer/assets",]
+
+#STATIC_ROOT = '/home/x9r71vnvvb94/public_html/static'
+#MEDIA_ROOT = '/home/x9r71vnvvb94/public_html/media'
+

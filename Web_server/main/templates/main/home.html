@@ -96,22 +96,16 @@
 							<li class="main-menu-active">
 								<a href="/">Home</a>
 							</li>
-							<li class="mega-menu-item dropdown">
-								<a data-toggle="dropdown">Car</a>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="{% url 'search' %}">Add Car</a>
-									<a class="dropdown-item" href="#">Edit Car</a>
-								</div>					
+							<li class="main-menu-active">
+								<a href="{% url 'search' %}">Search Car</a>
 							</li>
-
-							<li class="mega-menu-item dropdown">
-								<a data-toggle="dropdown">Customer</a>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<li class="main-menu-active">
+								<a data-toggle="dropdown" href="#">Customer</a>
+								<div class="dropdown-menu">
 									<a class="dropdown-item" href="#">Add Customer</a>
 									<a class="dropdown-item" href="#">Edit Customer</a>
 								</div>
 							</li>
-
 							<li class="mega-menu-item">
 								<a href="#">Profile</a>
 							</li>
