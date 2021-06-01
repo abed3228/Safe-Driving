@@ -1,0 +1,138 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block head %}
+	<!--===============================================================================================-->
+    <style>
+    body {
+    font-family: Arial;
+    }
+
+    * {
+    box-sizing: border-box;
+    }
+
+    form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    }
+
+    form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    }
+
+    form.example button:hover {
+    background: #0b7dda;
+    }
+
+    form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+    }
+    </style>
+   
+  
+{% endblock head %}
+
+{% block index %}
+	<li><a href="#">Customer</a></li>
+    <li><a href="{% url 'CustomerSearch' %}">Search</a></li>
+    <li><a href="{% url 'customerView' customer.id %}">{{customer.customer_identification}}</a></li>
+    <li><a href="#">Search Car</a></li>
+{% endblock index %}
+
+{% block main %}
+
+    <form method="GET" class="example" style="margin:auto;max-width:300px">
+    	{% csrf_token %}
+        <input type="text" id="query" name="query" placeholder="Search Car"/>
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+    
+
+    {% if form %}
+        <form method="POST" action="{% url 'customerAddCar' customer.id %}">
+             {% csrf_token %}
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="car_number">Car Number</label>
+                        <input type="text" name="car_number" class="form-control" id="car_number" value="{{ car_number }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="car_manufacturer">Car Manufacturer</label>
+                        <input type="text" name="car_manufacturer" class="form-control" id="car_manufacturer" value="{{ car_manufacturer }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="car_model">Car Model</label>
+                        <input type="text" name="car_model" class="form-control" id="car_model" value="{{ car_model }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="car_fuel_type">Car Fuel Type</label>
+                        <input type="text" name="car_fuel_type" class="form-control" id="car_fuel_type" value="{{ car_fuel_type }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="car_color">Car Color</label>
+                        <input type="text" name="car_color" class="form-control" id="car_color" value="{{ car_color }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="serial_number_car">serial number dev</label>
+                        <input type="text" name="serial_number_car" class="form-control" id="serial_number_car" value="{{ serial_number_car }}" required >
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="car_year">Car Year</label>
+                        <input type="text" name="car_year" class="form-control" id="car_year" value="{{ car_year }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="car_type">Car Type</label>
+                        <input type="text" name="car_type" class="form-control" id="car_type" value="{{ car_type }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="car_finishing">Car Finishing</label>
+                        <input type="text" name="car_finishing" class="form-control" id="car_finishing" value="{{ car_finishing }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="car_owner">Car Type owner</label>
+                        <input type="text" name="car_owner" class="form-control" id="car_owner" value="{{ car_owner }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="car_test">Car Test</label>
+                        <input type="text" name="car_test" class="form-control" id="car_test" value="{{ car_test }}" readonly="readonly" >
+                    </div>
+                    <div class="form-group">
+                        <label for="code_car">code</label>
+                        <input type="text" name="code_car" class="form-control" id="code_car" value="" >
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="customer_identification">customer id</label>
+                        <input type="text" name="customer_identification" class="form-control" id="customer_identification" value="{{ customer_identification }}" readonly="readonly" >
+                    </div>
+                    <div class="text-center" style="color:red;">
+                            <span>This is the ID of the client you want to add vehicles</br></span>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-primary">Add Car</button>
+                </div>                   
+            </div>
+        </form>
+    {% endif %}
+{% endblock main%}

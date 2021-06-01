@@ -1,0 +1,116 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block head %}
+    
+{% endblock head %}
+
+
+
+{% block main %}
+    <div class="container d-flex flex-column align-items-center justify-content-center" data-aos="fade-up">
+      <h1><b>Welcome to Safe Driving<b></h1>        
+    </div>
+     <div class="container d-flex flex-column align-items-center justify-content-center" data-aos="fade-up">
+        <p> by Alnkib Abed</p>
+      <h2>We are building a car alcohol testing system</h2>
+      <h2>Our goal is that we all drive in a safe environment</h2>
+      <img src="{% static 'images/traffic_1.jpg'%}" style="width: 100%;height: auto;">
+    </div>
+
+  </section><!-- End Hero -->
+
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+        <div class="container"><h5><b>How the system works</b></h5></div>
+    </section><!-- End Clients Section -->
+
+
+    <!-- ======= Steps Section ======= -->
+    <section id="steps" class="steps">
+      <div class="container">
+
+        <div class="row no-gutters" data-aos="fade-up">
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="100">
+            <span>01</span>
+            <p>Before starting the vehicle</p>
+            <p>Press the alcohol test button</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="200">
+            <span>02</span>
+            <p>The system will ask the user to exhale into the device</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="300">
+            <span>03</span>
+            <p>The system will analyze the level of alcohol</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="100">
+            <span>04</span>
+            <p>If the alcohol level is normal, the system will switch to entering a secret code for the vehicle</p>
+            <p>Otherwise it will move to the next stage</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="200">
+            <span>05</span>
+            <p>If the alcohol level is quite close to the allowable The system will ask the user to wait</p>
+            <p>Otherwise it will move to the next stage</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 content-item" data-aos="fade-up" data-aos-delay="300">
+            <span>06</span>
+            <p>The level of alcohol in the blood is very high The system will send a message to the vehicle owner (registered in the system)</p>
+             <p>That the driver is drunk and the location of the vehicle</p>
+             <p>During all this time the vehicle will not start</p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Steps Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Services</h2>
+        </div>
+
+        <div class="row">
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+            
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx  bx-car"></i></div>
+              <p class="description">Vehicle alcohol testing device</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-support"></i></div>
+              <p class="description">Service centers<br>Installation and maintenance of our servicesre</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="400">
+            
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+  
+
+ 
+
+
+{% endblock main%}

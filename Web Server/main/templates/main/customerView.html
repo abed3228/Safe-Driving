@@ -1,0 +1,247 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block head %}
+	<!--===============================================================================================-->
+    <style>
+    body {
+    font-family: Arial;
+    }
+
+    * {
+    box-sizing: border-box;
+    }
+
+    form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    }
+
+    form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    }
+
+    form.example button:hover {
+    background: #0b7dda;
+    }
+
+    form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+    }
+
+    #err {
+        color: #FFFFFF;
+        border: 1px solid black;
+        padding: 05px 05px 05px;
+        background-color:  #FF0000;
+    }
+    </style>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  
+{% endblock head %}
+
+{% block index %}
+	<li><a href="#">Customer</a></li>
+    <li><a href="{% url 'CustomerSearch' %}">Search</a></li>
+    <li><a href="#">{{customer.customer_identification}}</a></li>
+    <li><a href="#">View</a></li>
+{% endblock index %}
+
+{% block main %}
+    
+    <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Information Details </legend>
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-sm-6">
+                <input type="text" name="customer_name" id="customer_name"  value="{{ customer.customer_name }}" placeholder="First Name or Company Name" class="form-control" disabled>
+                </div>
+                <div class="col-sm-6">
+                <input type="text" name="customer_last_name" id="customer_last_name" value="{{ customer.customer_last_name }}" placeholder="Last Name" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-6">
+                        <input type="text" name="customer_identification" id="customer_identification" placeholder="Id" value="{{ customer.customer_identification }}" class="form-control" disabled>
+                </div>
+                <div class="col-sm-6">
+                <input type="text" name="customer_date" id="customer_date" value="{{ customer.customer_date|date:"d/m/Y" }}" placeholder="Date Of Birth" class="form-control" disabled >
+                </div>
+            </div>
+        <!-- Address Section -->
+        <!-- Form Name -->
+        <legend>Address Details</legend>
+        <!-- Text input-->
+            <div class="form-group">
+                <div class="col-sm-5">
+                <input type="text" name="customer_address" id="customer_address" value="{{ customer.customer_address }}" placeholder="Address" class="form-control" disabled>
+                </div>
+                <div class="col-sm-3">
+                <input type="text" name="customer_address_number" id="customer_address_number" value="{{ customer.customer_address_number }}" placeholder="Number" class="form-control" disabled>
+                </div>
+                <div class="col-sm-4">
+                <input type="text" name="customer_city" id="customer_city" placeholder="City" value="{{ customer.customer_city }}" class="form-control" disabled>
+                </div>
+            </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <div class="col-sm-4">
+            <input type="text" name="customer_post_code" id="customer_post_code" value="{{ customer.customer_post_code }}" placeholder="Post Code" class="form-control" disabled >
+            </div>
+            <div class="col-sm-4">
+            <input value="{{ customer.customer_state }}"  type="customer_state" name="customer_state" id="customer_state" placeholder="customer_state" class="form-control" disabled>
+            </input>
+            </div>
+            <div class="col-sm-4">
+            <input value="{{ customer.customer_country }}" type="customer_country" name="customer_country" id="customer_country" placeholder="country" class="form-control" disabled>
+                
+            </input>
+            </div> 
+        </div>
+
+        <legend>Contact Details</legend>
+        <div class="form-group">
+            <div class="col-sm-6">
+            <input type="text" name="customer_fist_name_contact_details" id="customer_fist_name_contact_details" value="{{ customer.customer_fist_name_contact_details }}" placeholder="First Name" class="form-control" disabled>
+            </div>
+            <div class="col-sm-6">
+            <input type="text" name="customer_last_name_contact_details" id="customer_last_name_contact_details" value="{{ customer.customer_last_name_contact_details }}" placeholder="Last Name" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-4">
+                <input type="codePhone" name="customer_code_phone" id="customer_code_phone" value="{{ customer.customer_code_phone }}" placeholder="code +" class="form-control" disabled>    
+                </input>
+                </div>  
+            <div class="col-sm-8">
+            <input type="pPhoneNbr" name="customer_phone" id="customer_phone" value="{{ customer.customer_phone }}" placeholder="Phone Number" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="email" name="customer_email" id="customer_email" value="{{ customer.customer_email }}" placeholder="Email" class="form-control" disabled>
+            </div>
+        </div>
+        </fieldset>
+        <legend>Cars</legend>
+        <fieldset>
+            {% if cars %}
+                {% for car in cars %}
+                    <div class="row col-sm-12">
+                        <legend>{{ car.car_manufacturer }} {{ car.car_model }} {{ car.car_year }}  </legend>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="car_number">Car Number</label>
+                                <input type="text" name="car_number" class="form-control" id="car_number" value="{{ car.car_number }}" readonly="readonly" >
+                            </div>
+                            <div class="form-group">
+                                <label for="car_model">Car Model</label>
+                                <input type="text" name="car_model" class="form-control" id="car_model" value="{{ car.car_model }}" readonly="readonly" >
+                            </div>
+                            <div class="form-group">
+                                <label for="car_fuel_type">Car Fuel Type</label>
+                                <input type="text" name="car_fuel_type" class="form-control" id="car_fuel_type" value="{{ car.car_fuel_type }}" readonly="readonly" >
+                            </div>
+                            <div class="form-group">
+                                <label for="car_color">Car Color</label>
+                                <input type="text" name="car_color" class="form-control" id="car_color" value="{{ car.car_color }}" readonly="readonly" >
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="car_year">Car Year</label>
+                                <input type="text" name="car_year" class="form-control" id="car_year" value="{{ car.car_year }}" readonly="readonly" >
+                            </div>
+                            <div class="form-group">
+                                <label for="car_type">Car Type</label>
+                                <input type="text" name="car_type" class="form-control" id="car_type" value="{{ car.car_type }}" readonly="readonly" >
+                            </div>
+                            <div class="form-group">
+                                <label for="car_finishing">Car Finishing</label>
+                                <input type="text" name="car_finishing" class="form-control" id="car_finishing" value="{{ car.car_finishing }}" readonly="readonly" >
+                            </div>
+                            <div class="form-group">
+                                <label for="car_owner">Car Type owner</label>
+                                <input type="text" name="car_owner" class="form-control" id="car_owner" value="{{ car.car_owner }}" readonly="readonly" >
+                            </div>
+                        </div>
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="car_manufacturer">Car Manufacturer</label>
+                                <input type="text" name="car_manufacturer" class="form-control" id="car_manufacturer" value="{{ car.car_manufacturer }}" readonly="readonly" >
+                            </div>
+                            <div class="form-group">
+                                <label for="car_test">Car Test</label>
+                                <input type="text" name="car_test" class="form-control" id="car_test" value="{{ car.car_test }}" readonly="readonly" >
+                            </div>
+                            <div class="form-group">
+                                <label for="serial_number_car">Serial number</label>
+                                <input type="text" name="serial_number_car" class="form-control" id="serial_number_car" value="{{ car.serial_number_car }}" readonly="readonly" >
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                             <div class="form-group">
+                                <label></label>
+                                <form method="GET" action="{% url 'cpwd' car.serial_number_car%}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">change Password</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        
+                {% endfor %}
+            {% else %}
+                <div class="col-sm-10">
+                    <h3> No vehicles were found for this customer</h3>
+                </div>
+            {% endif %}
+        </fieldset>
+        <legend></legend>
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-1">
+                <div class="pull-right row">
+                     <form method="GET" action="{% url 'CustomerSearch' %}">
+                        <button type="submit" class="btn btn-secondary">Back to search</button>
+                    </form>
+                    <div><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+                    <form method="POST" action="{% url 'customerSearchCar' customer.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">Add Car</button>
+                    </form>
+                    <div><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+                    <form method="GET" action="{% url 'customerEdit' customer.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Edit Customer</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </fieldset>
+    </div><!-- /.col-lg-12 -->
+</div><!-- /.row -->
+
+
+{% endblock main%}

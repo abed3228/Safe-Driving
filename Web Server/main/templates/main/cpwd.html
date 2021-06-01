@@ -1,0 +1,77 @@
+ {% extends "main/base.html" %}
+
+{% load static %}
+
+{% block head %}
+	
+{% endblock head %}
+{% block index %}
+    <li><a href="#">Customer</a></li>
+    <li><a href="{% url 'CustomerSearch' %}">Search</a></li>
+    <li><a href="#">{{car.customer_identification}}</a></li>
+    <li><a href="#">{{car.car_number}}</a></li>
+    <li><a href="#">change Password</a></li>
+{% endblock index %}
+
+{% block main %}	 	
+	<div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <legend>Details</legend>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="car_number">Car Number</label>
+                <input type="text" name="car_number" class="form-control" id="car_number" value="{{ car.car_number }}" disabled >
+            </div>
+            
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="car_year">Serial number</label>
+                <input type="text" name="car_year" class="form-control" id="car_year" value="{{ dev.serial_number_Device }}" disabled >
+            </div> 
+        </div>
+    </div>
+    <form method="POST" action="{% url 'cpwd' dev.serial_number_Device %}" class="form-horizontal" role="form">
+            {% csrf_token %}
+            <fieldset>
+            
+            
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="car_year">Old password</label>
+                        <input type="password"  class="form-control" name="old_pwd"  id="old_pwd" maxlength="4">
+                    </div>
+                    <div class="form-group">
+                        <label for="car_year">New password</label>
+                        <input type="password"  class="form-control" name="new_pwd"  id="new_pwd" maxlength="4">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label ><br></label>
+                        <input type="password" class="form-control"   disabled >
+
+                    </div>
+                    <div class="form-group">
+                        <label for="car_year">New password again</label>
+                        <input type="password"  class="form-control" name="new_pwd_again"  id="new_pwd_again" maxlength="4">
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-1">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-primary">change</button>
+                    </div>
+                    </div>
+                </div>
+           
+            </div>
+            </fieldset>
+    </form>
+{% endblock main%}
+</html>

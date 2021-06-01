@@ -1,0 +1,313 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<html lang="he">
+
+<head>
+  <meta charset="utf-8">
+  
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Safe Driving</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Krub:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/icofont/icofont.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/boxicons/css/boxicons.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/venobox/venobox.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/aos/aos.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/alertsSuccess.css'%}">
+	
+  	<link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		function autoClick(){
+			document.getElementById('linkToClick').click();
+		}
+		function mess_fun() {
+			document.getElementById("mess_id").innerHTML ='';
+		}	
+	</script>
+	
+  {% block head %}
+  {% endblock head %}
+
+
+</head>
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<header id="header" class="fixed-top">
+		<div class="container d-flex align-items-center">
+
+			<h1 class="logo mr-auto"><a href="/">Safe Driving</a></h1>
+			
+
+			<nav class="nav-menu d-none d-lg-block">
+			<ul>
+
+				{% if user.is_authenticated %}
+					<li><a href="/">Home</a></li>
+					<li class="drop-down"><a href="#">Car</a>
+						<ul>
+							<li><a href="{% url 'searchCar' %}">Search</a></li>
+						</ul>
+					</li>
+					<li class="drop-down"><a href="#">Customer</a>
+						<ul>
+							<li><a href="{% url 'CustomerSearch' %}">Search</a></li>
+							<li><a href="{% url 'CustomerAdd' %}">Add</a></li>
+						</ul>
+					</li>
+					<li class="drop-down"><a href="#">Other</a>
+						<ul>
+							<li><a href="{% url 'about' %}">About</a></li>
+							<li><a href="{% url 'contact' %}">Contact</a></li>
+							<li><a href="{% url 'ServiceCenters' %}">Service centers</a></li>
+						</ul>
+					</li>
+					<li class="drop-down"><a href="#">Hi! {{user}}</a>
+						<ul>
+							<li><a href="#">Profile</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#" onclick="$('#signOutBtn').click()" >Logout</a>
+						<form style='display: none;' method="POST" action="{% url 'logoutuser' %}" >
+							{% csrf_token %}
+							<button id="signOutBtn" type="submit">Logout</button>
+						</form>
+					</li>
+				{% else %}
+
+					<li><a href="/">Home</a></li>
+					<li><a href="{% url 'about' %}">About</a></li>
+					<li><a href="{% url 'contact' %}">Contact</a></li>
+					<li><a href="{% url 'ServiceCenters' %}">Service centers</a></li>
+					 <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+						<ul id="login-dp" class="dropdown-menu">
+							<li>
+								<div class="row">
+									<div class="col-md-12">
+										<div style="text-align: center;">Login</div>
+										<form class="form" role="form" method="POST" action="{% url 'home' %}" accept-charset="UTF-8" id="login-nav">
+												{% csrf_token %}
+												<br>
+												<div class="form-group">
+													<input type="text" name="username" class="form-control" placeholder="Username" id="username">
+												</div>
+												<div class="form-group">
+													<input type="password" name="password" class="form-control"  placeholder="Password" id="password">	
+												</div>
+												<div class="help-block text-right"><a href="">Forget the password ?</a></div>
+												<br>
+												<div class="form-group">
+													<button type="submit" class="btn btn-primary btn-block">Login</button>
+												</div>
+										</form>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+				{% endif %}
+
+			</ul>
+			</nav><!-- .nav-menu -->
+
+			<!--<a href="#about" class="get-started-btn scrollto">Get Started</a>-->
+
+		</div>
+	</header><!-- End Header -->
+
+	<main id="main">
+
+	<!-- ======= Breadcrumbs ======= -->
+	<section id="breadcrumbs" class="breadcrumbs">
+		<div class="container">
+
+		<ol>
+			<li><a href="/">Home</a></li>
+			<!--<li>Inner Page</li>-->
+			{% block index %}
+			{% endblock index %}
+
+		</ol>
+
+		</div>
+	</section><!-- End Breadcrumbs -->
+
+	<section class="inner-page">
+		<div class="container">
+			{% if user.is_authenticated %}
+				<script>
+					window.setTimeout(function () {
+						location.href = "{% url 'autologout' %}";
+					}, 10*60*1000);
+				</script>
+			{% endif %}
+		    {% if message %}
+            <div id="mess_id">
+                <script type="text/javascript">
+                    setTimeout('autoClick();',0);
+                </script>
+                <a id="linkToClick" href="#myModal" class="trigger-btn" data-toggle="modal"></a>
+
+                <!-- Modal HTML -->
+                <div id="myModal" class="modal fade">
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h5 class="text-center">{{message}}</h5>	
+                                <h5 class="text-center">{{message_1}}</h5>
+                                {% if message_2 %}
+                                    <br>
+                                    <p class="text-center">{{message_2}}</p>
+                                {% endif %}
+                            </div>
+                            <div class="modal-footer">
+                                <button onclick="mess_fun()" class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        {% endif %}
+			{% if not user.is_authenticated %}
+				<div class="row justify-content-center mt-5">
+					<div class="col-md-5">
+						{% if error %}
+							<div class="alert alert-danger" role="alert">
+								{{ error }}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			{% endif %}
+			{% block main %}
+			
+			{% endblock main %}
+		</div>
+	</section>
+
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer id="footer">
+
+	<div class="footer-top">
+		<div class="container">
+		<div class="row">
+
+			<div class="col-lg-3 col-md-6 footer-contact">
+			<h4>Safe Driving</h4>
+			<p>
+				Where I Am Street <br>
+				75008 Lod<br>
+				Israel <br><br>
+				<strong>Phone:</strong> +972 521234567<br>
+				<strong>Email:</strong> SafeDriving@alnkib.com<br>
+
+			</p>
+			</div>
+
+			<div class="col-lg-2 col-md-6 footer-links">
+			<h4>Useful Links</h4>
+			<ul>
+				<li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
+				<li><i class="bx bx-chevron-right"></i> <a href="{% url 'about' %}">About us</a></li>
+				<li><i class="bx bx-chevron-right"></i> <a href="{% url 'contact' %}">Contact</a></li>
+				<li><i class="bx bx-chevron-right"></i> <a href="{% url 'ServiceCenters' %}">Service centers</a></li>
+				<li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+			</ul>
+			</div>
+
+			<div class="col-lg-3 col-md-6 footer-links">
+			<h4>Alnkib Development</h4>
+			<ul>
+				<li><i class="bx bx-chevron-right"></i> <a href="#">IoT Development</a></li>
+				<li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+				<li><i class="bx bx-chevron-right"></i> <a href="#">Python Development</a></li>
+				<li><i class="bx bx-chevron-right"></i> <a href="#">Embedded Development</a></li>
+				<li><i class="bx bx-chevron-right"></i> <a href="#">Linux Kernel Development</a></li>
+			</ul>
+			</div>
+
+			<div class="col-lg-3 col-md-6 footer-contact">
+			<h4>Alnkib Development</h4>
+			<p>
+				Where I Am Street <br>
+				75008 Lod<br>
+				Israel <br><br>
+				<strong>Phone:</strong> +972 521234566<br>
+				<strong>Email:</strong> info@alnkib.com<br>
+
+			</p>
+			</div>
+			<!--
+				<div class="col-lg-4 col-md-6 footer-newsletter">
+				<h4>Join Our Newsletter</h4>
+				<form action="" method="post">
+					<input type="email" name="email"><input type="submit" value="Subscribe">
+				</form>
+				</div>
+			-->
+		</div>
+		</div>
+	</div>
+
+	<div class="container d-md-flex py-4">
+
+		<div class="mr-md-auto text-center text-md-left">
+		<div class="copyright">
+			Copyright © 2020 | Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+		</div>
+		<div class="credits">
+			Development by <a href="https://alnkib.com" target="_blank">alnkib.com</a>
+		</div>
+		</div>
+		<div class="social-links text-center text-md-right pt-3 pt-md-0">
+			<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+			<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+			<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+			<a href="#" class="linkedin"><i class="bx bxl-youtube"></i></a>
+		</div>
+	</div>
+	</footer><!-- End Footer -->
+
+	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+	<div id="preloader"></div>
+
+	<!-- Vendor JS Files -->
+
+
+	<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+	<script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+	<script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+	<script src="{% static 'vendor/venobox/venobox.min.js' %}"></script>
+	<script src="{% static 'vendor/aos/aos.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+
+
+
+</body>
+
+</html>

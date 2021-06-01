@@ -1,0 +1,296 @@
+ {% extends "main/base.html" %}
+
+{% load static %}
+
+{% block head %}
+	<style>
+		body {
+		font-family: Arial, Helvetica, sans-serif;
+		margin: 0;
+		}
+
+		html {
+		box-sizing: border-box;
+		}
+
+		*, *:before, *:after {
+		box-sizing: inherit;
+		}
+
+		.column {
+		float: left;
+		width: 33.3%;
+		margin-bottom: 16px;
+		padding: 0 8px;
+		}
+
+		.card {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		margin: 8px;
+		}
+
+		.about-section {
+		padding: 50px;
+		text-align: center;
+		background-color: #474e5d;
+		color: white;
+		}
+
+		.container {
+		padding: 0 16px;
+		}
+
+		.container::after, .row::after {
+		content: "";
+		clear: both;
+		display: table;
+		}
+
+		.title {
+		color: grey;
+		}
+
+		.button {
+		border: none;
+		outline: 0;
+		display: inline-block;
+		padding: 8px;
+		color: white;
+		background-color: #000;
+		text-align: center;
+		cursor: pointer;
+		width: 100%;
+		}
+
+		.button:hover {
+		background-color: #555;
+		}
+
+		@media screen and (max-width: 650px) {
+		.column {
+			width: 100%;
+			display: block;
+		}
+		}
+	</style>
+	<script>
+		function topFunction() {
+			document.body.scrollTop = 0; // For Safari
+			document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+		}
+		function myFunction(selTag) {
+			var opt = selTag.options[selTag.selectedIndex].text;
+			var he = "Hebrew";
+			var en = "English";
+			console.log(opt);
+			console.log(he);
+
+			if(opt == he){
+				document.getElementById("demo").innerHTML = 	'<div>'+
+																	'<div style="font-size: 20px;"> ' +
+																		'<p>'+
+																			'(אנו מפתחים את המערכת זו כחלק מפרוייקט גמר שלי במכללה למנהל (מסלול האקדמי המכללה למנהל <br>' +
+																		'</p>' +
+																	'</div>' +
+
+																	'<h2><b><ins>:מטרת הפרויקט</ins></b></h2>' +
+																	'<div style="font-size: 20px;" >' +
+																		'<p>'+
+																			'מערכת בדיקת אלכוהול ברכב לפני ההתנעה.<br>' +
+																			'אם רמת אלכוהול גובהה המותר אז המערכת לא תיתן לנהג להתניע את הרכב.<br>' +
+																			'בנוסף המערכת שולחת הודעת <span dir="ltr">sms</span> לטלפון המוגדר כגיבוי הכולל את המיקום <span dir="ltr"> (gps) </span>' +
+																			' של הרכב .<br>' +
+																			'אחרת הרכב יתניע.' +
+																		'</p>' +
+																	'</div>'+
+																	
+																	'<h2>'+
+																		'<b><ins>:תיאור הפרויקט</ins></b>'+
+																	'</h2>'+
+																	'<div style="font-size: 20px;">'+
+																		'<ins>בעיה ופתרון של נהיגה בשכרות</ins>'+
+																		'<p>'+
+																			'נתוני עמותת “אור ירוק”, המבוססים על נתוני הלשכה המרכזית לסטטיסטיקה<br>'+
+																			'עולה כי 279 תאונות דרכים עם נפגעים, מתרחשות מדי שנה בממוצע, כשהנהג היה תחת השפעת אלכוהול/סמים <br>.(נתוני שנת 2006-2011)'+
+																			'<br><br>'+
+																			'נתוני אגף התנועה ל-2019 בעשור האחרון ואיתם נתון מדהים: מ-2009 עד 2019<br>'+
+																			'.עצרה המשטרה 106,121 נהגים כשהם שיכורים או בהשפעת סמים<br>'+
+																			'על פי נתוני האגף, בפעילות ממוקדת בנושא ב-2019 נתפסו 9,774 נהגים שנהגו בהשפעת אלכוהול או סמים לעומת אשתקד שבה נתפסו 9,361 נהגים	<br>'+ 
+																			'עלייה של יותר מ-4% לפי כתבה של ישראל היום'+
+																		'<p>'+
+																		'<p>'+
+																			'בנוסף גם אם אתה נהג אחראי איך אתה יכול לדעת שצריכתה את הכמות אלכוהול המותר על פי החוק <br>'+
+																			' נהג שיכור הוא מי שנוהג תחת השפעת אלכוהול או סם משכר או מסוכן, כאשר ריכוז האלכוהול בגופו הוא 240 מיקרוגרם אלכוהול בליטר אוויר נשוף ומעלה'+
+																			' או 50 מיליגרם אלכוהול במאה מיליליטר דם בבדיקת שכרות או בדיקת דם'+
+																		'</p>'+
+																		'<p>'+
+																			'ולכן הנהגים אלה לא רק מסכנים את עצמם אלא גם מסכנים את שאר משתמשי הדרך<br>'+
+																			'ולכן צריך פתרון למנוע מאותם נהגים לעלות על כלי רכב והתחיל נסיעה <br>'+
+																			'כתוצאה מכך המערכת של <span dir="ltr">Safe driving</span>  תמנע מנהג שיכור להתניע את כלי רכב כלשהו'+
+																			' ולנוסע וכך לסכן את כולם'+
+																		'</p>'+
+																		'<p>'+
+																			'המטרה המרכזית המערכת של <span dir="ltr">Safe driving</span> היא צמצום של נהגים שנוהגים בשכרות ולכן הורדנו אנשים מסוכנים מהכביש '+
+																			'וכך אנו יכולים להציל בני אדם'+
+																		'</p>'+
+																	'</div>'+
+																'</div>';
+			}
+			else if(opt == en){
+				document.getElementById("demo").innerHTML = '<div>'+
+																'<div style="font-size: 20px;" >' +
+																	'<p>'+
+																		'We develop this system as part of my final project at the College of Management Academic Studies' +
+																	'</p>' +
+																'</div>' +
+																
+																'<h2><b><ins>the project target:</ins></b></h2>' +
+																'<div style="font-size: 20px;" >' +
+																	'<p>'+
+																		'Vehicle alcohol test system before starting.<br>' +
+																		'If the level of alcohol is allowed, the system will not allow the driver to start the vehicle.<br>' +
+																		'In addition, the system sends an SMS message to the phone that is defined as a backup that includes<br>'+
+																		'the location (GPS) of the vehicle Otherwise the vehicle will start'+
+																	'</p>' +
+																'</div>'+
+																'<h2>'+
+																	'<b><ins>the projects description:</ins></b>'+
+																'</h2>'+
+																'<div style="font-size: 20px;">'+
+																	'<ins>Problem and solution of drunk driving</ins>'+
+																	'<p>'+
+																		'Data from the oryarok Association, based on data from the Central Bureau of Statistics in Israel<br>'+
+																		'It appears that 279 road accidents with casualties occur every year on average,<br>'+
+																		'when the driver was under the influence of alcohol / drugs (years data 2006-2011)'+
+																		'<br><br>'+
+																		'Data from the Traffic Division for 2019 in the last decade and with them an amazing figure: from 2009 to 2019 <br>'+
+																		'Police arrested 106,121 drivers while intoxicated or under the influence of drugs<br>'+
+																		'According to the divisions data, in targeted activity on the subject in 2019, 9,774 drivers were caught driving under the influence of alcohol or drugs,<br>'+ 
+																		'compared to last year, when 9,361 drivers were caught.<br>'+
+																		'An increase of more than 4% according to an article by Israel Today'+
+																	'<p>'+
+																	'<p>'+
+																		'In addition even if you are a responsible driver how can you know that it consumed the amount of alcohol allowed by law<br>'+
+																		'A drunk driver is someone who drives under the influence of alcohol or an intoxicating or dangerous drug,<br>'+
+																		'when the concentration of alcohol in his body is 240 micrograms of alcohol per liter of<br>'+
+																		'exhaled air or more or 50 milligrams of alcohol per hundred milliliters of blood in a drunkenness or blood test.<br>'+
+																	'</p>'+
+																	'<p>'+
+																		'Therefore these drivers not only endanger themselves but also endanger the rest of the road users<br>'+
+																		'Therefore a solution is needed to prevent those drivers from getting on a vehicle and started driving<br>'+
+																		'As a result, the Safe Driving system will prevent a drunk driver from starting a vehicle and a passenger,<br> thus endangering everyone<br>'+
+																	'</p>'+
+																	'<p>'+
+																		'The main goal of the Safe Driving system is to reduce drunk driving,<br>'+
+																		'so we have taken dangerous people off the road so we can save people.'+
+																	'</p>'+
+																'</div>'+
+															'</div>' ;
+			}
+		}
+	</script>
+
+{% endblock head %}
+
+
+{% block index %}
+	<li><a href="{% url 'about' %}">About Us</a></li>
+{% endblock index %}
+
+{% block main %}	
+	<div class="about-section">
+		<h1><b><ins>About Us</b></ins></h1>
+		<select onchange="myFunction(this)">
+			<option> English</option>
+			<option> Hebrew</option>
+		</select>
+		<div id="demo">
+			 <div>
+				<div style="font-size: 20px;">
+					<p>
+						We develop this system as part of my final project at the College of Management Academic Studies
+					</p>
+				</div>
+
+				<h2><b><ins>the project target:</ins></b><h2>
+				<div style="font-size: 20px;" >
+					<p>
+						Vehicle alcohol test system before starting.<br>
+						If the level of alcohol is allowed, the system will not allow the driver to start the vehicle.<br>
+						In addition, the system sends an SMS message to the phone that is defined as a backup that includes<br>
+						the location (GPS) of the vehicle Otherwise the vehicle will start
+					</p>
+				</div>
+				<h2>
+					<b><ins>the projects description:</ins></b>
+				</h2>
+				<div style="font-size: 20px;">
+					<ins>Problem and solution of drunk driving</ins>
+					<p>
+						Data from the oryarok Association, based on data from the Central Bureau of Statistics in Israel<br>
+						It appears that 279 road accidents with casualties occur every year on average,<br>
+						when the driver was under the influence of alcohol / drugs (years data 2006-2011)
+						<br><br>
+						Data from the Traffic Division for 2019 in the last decade and with them an amazing figure: from 2009 to 2019 <br>
+						Police arrested 106,121 drivers while intoxicated or under the influence of drugs<br>
+						According to the division's data, in targeted activity on the subject in 2019, 9,774 drivers were caught driving under the influence of alcohol or drugs,<br>
+						compared to last year, when 9,361 drivers were caught.<br>
+						An increase of more than 4% according to an article by Israel Today
+					<p>
+					<p>
+						In addition even if you are a responsible driver how can you know that it consumed the amount of alcohol allowed by law<br>
+						A drunk driver is someone who drives under the influence of alcohol or an intoxicating or dangerous drug,<br>
+						when the concentration of alcohol in his body is 240 micrograms of alcohol per liter of<br>
+						exhaled air or more or 50 milligrams of alcohol per hundred milliliters of blood in a drunkenness or blood test.<br>
+					</p>
+					<p>
+						Therefore these drivers not only endanger themselves but also endanger the rest of the road users<br>
+						Therefore a solution is needed to prevent those drivers from getting on a vehicle and started driving<br>
+						As a result, the Safe Driving system will prevent a drunk driver from starting a vehicle and a passenger,<br> thus endangering everyone<br>
+					<p>
+					<p>
+						The main goal of the Safe Driving system is to reduce drunk driving,<br>
+						so we have taken dangerous people off the road so we can save people.
+					<p>
+				</div>
+
+			</div>
+		</div>
+		<button onclick="topFunction()" id="myBtn" title="Go to top">Top of Page</button>
+	</div>
+
+		<h2 style="text-align:center">Our Team</h2>
+		<div class="row">
+
+		<div class="column">
+			
+		</div>
+
+		<div class="column">
+			<div class="card">
+				<div class="container" style="padding-left: 20%;">
+					<img src="https://res.cloudinary.com/mhmd/image/upload/v1556834133/avatar-2_f8dowd.png" style="width:75%;">
+				</div>
+				<div class="container">
+					<h2>Abed Alnkib</h2>
+					<p class="title">CEO & Founder</p>
+					<p class="title">Development Manager</p>
+					<p>Phone: +972 81234567</p>
+					<p>Email: abed3228@gmail.com</p>
+					<p><div class="button-wrapper">
+							<a class="button cta-button" href="tel:+97281234567">Phone Contact</a>
+						</div> 
+					</p>
+					<p><div class="button-wrapper">
+							<a class="button cta-button" href="mailto:abed3228@gmail.com">Email Contact</a>
+						</div> 
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="column">
+			
+		</div>
+{% endblock main %}	
+

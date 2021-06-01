@@ -1,0 +1,131 @@
+ {% extends "main/base.html" %}
+
+{% load static %}
+
+{% block head %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <scrip src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <scrip src="//code.jquery.com/jquery-1.11.1.min.js"></scrip>
+
+{% endblock head %}
+
+
+{% block index %}
+	<li><a href="#">Customer</a></li>
+    <li><a href="{% url 'CustomerSearch' %}">Search</a></li>
+    <li><a href="{% url 'customerView' customer.id %}">{{customer.customer_identification}}</a></li>
+    <li><a href="#">Edit</a></li>
+    
+{% endblock index %}
+
+{% block main %}	
+    <div class="row">
+        <div class="col-md-8 col-md-offset-1">
+        <div style="text-align: center;">
+          <h3>Customer Edit - {{customer.customer_identification}}/{{customer.id}}</h3>
+          <br>
+        </div>
+        <form method="POST" class="form-horizontal" role="form">
+            {% csrf_token %}
+            <fieldset>
+
+            <!-- Form Name -->
+            <legend>Information Details </legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-sm-6">
+                <input type="text" name="customer_name" id="customer_name"  value="{{ customer.customer_name }}" placeholder="First Name or Company Name" class="form-control" required>
+                </div>
+                <div class="col-sm-6">
+                <input type="text" name="customer_last_name" id="customer_last_name" value="{{ customer.customer_last_name }}" placeholder="Last Name" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-6">
+                <input type="text" name="customer_identification" id="customer_identification" value="{{ customer.customer_identification }}" placeholder="Id or Company Number" class="form-control" disabled>
+                </div>
+                <div class="col-sm-6">
+                <input type="text" name="customer_date" id="customer_date" value="{{ customer.customer_date|date:"Y-m-d"}}" placeholder="Date Of Birth" class="form-control" required>
+                </div>
+            </div>
+            <div class="text-center" style="color:red;">
+                <span>If a company - Write down the date when the company's established</br></span>
+                <span>If not known, write down the date of the day<br></span>
+                <span>(must inform the customer that this date will help to recover the password)</span>
+            </div>
+            
+
+    <!-- Address Section -->
+            <!-- Form Name -->
+            <legend>Address Details</legend>
+            <!-- Text input-->
+                <div class="form-group">
+                    <div class="col-sm-5">
+                    <input type="text" name="customer_address" id="customer_address" value="{{ customer.customer_address }}" placeholder="Address" class="form-control" required>
+                    </div>
+                    <div class="col-sm-3">
+                    <input type="text" name="customer_address_number" id="customer_address_number" value="{{ customer.customer_address_number }}" placeholder="Number" class="form-control" required>
+                    </div>
+                    <div class="col-sm-4">
+                    <input type="text" name="customer_city" id="customer_city" placeholder="City" value="{{ customer.customer_city }}" class="form-control" required>
+                    </div>
+                </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-sm-4">
+                <input type="text" name="customer_post_code" id="customer_post_code" value="{{ customer.customer_post_code }}" placeholder="Post Code" class="form-control" >
+                </div>
+                <div class="col-sm-4">
+                  <input type="text" name="customer_state" id="customer_state" value="{{ customer.customer_post_code }}" placeholder="customer_state" class="form-control">
+                  </input>
+                </div>
+                <div class="col-sm-4">
+                <input type="text" name="customer_country" id="customer_country" value="{{ customer.customer_country }}" placeholder="country" class="form-control" required>
+                </input>
+                </div> 
+            </div>
+
+            <legend>Contact Details</legend>
+            <div class="form-group">
+                <div class="col-sm-6">
+                <input type="text" name="customer_fist_name_contact_details" id="customer_fist_name_contact_details" value="{{ customer.customer_fist_name_contact_details }}" placeholder="First Name" class="form-control" required>
+                </div>
+                <div class="col-sm-6">
+                <input type="text" name="customer_last_name_contact_details" id="customer_last_name_contact_details" value="{{ customer.customer_last_name_contact_details }}" placeholder="Last Name" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                    <div class="col-sm-4">
+                    <input  name="customer_code_phone" id="customer_code_phone" value="{{ customer.customer_code_phone }}" placeholder="code +" class="form-control" required>
+                    </input>
+                    </div>  
+                <div class="col-sm-8">
+                <input type="pPhoneNbr" name="customer_phone" id="customer_phone" value="{{ customer.customer_phone }}" placeholder="Phone Number" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="email" name="customer_email" id="customer_email" value="{{ customer.customer_email }}" placeholder="Email" class="form-control" required>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-1">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                </div>
+            </div>
+            </fieldset>
+        </form>
+        <form method="GET" action="{% url 'customerView' customer.id %}">
+            <button type="submit" class="btn btn-danger">Cancel</button>
+        </form>
+        </div><!-- /.col-lg-12 -->
+    </div><!-- /.row -->
+
+
+{% endblock main %}	
+

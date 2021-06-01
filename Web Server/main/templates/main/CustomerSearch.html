@@ -1,0 +1,100 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block head %}
+	<!--===============================================================================================-->
+    <style>
+    body {
+    font-family: Arial;
+    }
+
+    * {
+    box-sizing: border-box;
+    }
+
+    form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    }
+
+    form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+    }
+
+    form.example button:hover {
+    background: #0b7dda;
+    }
+
+    form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+    }
+
+    #err {
+        color: #FFFFFF;
+        border: 1px solid black;
+        padding: 05px 05px 05px;
+        background-color:  #FF0000;
+    }
+    </style>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  
+{% endblock head %}
+
+{% block index %}
+	<li><a href="#">Customer</a></li>
+    <li><a href="{% url 'CustomerSearch' %}">Search</a></li>
+{% endblock index %}
+
+{% block main %}
+
+    {% if con %}
+        <form method="GET" class="example" style="margin:auto;max-width:300px">
+            {% csrf_token %}
+            <input type="text" id="query" name="query" value="{{con}}" placeholder="Search"/>
+            <button type="submit"><i class="fa fa-search"></i></button>
+            <div class="text-center" >
+                <span>Customer Search:<br></span>
+                <span>Personal ID or Company number</span>
+            </div>
+        </form>
+        <div class="text-center" id="err">
+            <br>
+            <h3>Customer: {{con}} not found</br></span>
+            <div class="form-group">
+                <div class="pull-center">
+                    <br>
+                    <button type="submit" class="btn btn-info" onclick="window.location.href='/customer/add'">Move to Add in Customer</button>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <form method="GET" class="example" style="margin:auto;max-width:300px">
+            {% csrf_token %}
+            <input type="text" id="query" name="query" placeholder="Search"/>
+            <button type="submit"><i class="fa fa-search"></i></button>
+            <div class="text-center">
+                <span>Customer Search:<br></span>
+                <span>Personal ID or Company number</span>
+            </div>
+        </form>
+    {% endif %}
+
+{% endblock main%}
