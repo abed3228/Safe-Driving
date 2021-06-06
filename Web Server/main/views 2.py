@@ -33,8 +33,8 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 #from .models import Todo,Blog,Devices,Status,Tap.
 
 #api
-account_sid = 'ACff51017c0d13c2d083c37e258932fa0b'
-auth_token =  '65d6c32d28a0ed8e08731a5ae7402da6'
+account_sid = ''
+auth_token =  ''
 client = Client(account_sid, auth_token)
 
 def car_api(number_car):
